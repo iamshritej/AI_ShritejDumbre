@@ -1,0 +1,13 @@
+Progressive Context Management System.
+
+
+FUNCTION generate_coherent_educational_content(concept, knowledge_context, sector):
+    context_manager = EducationalContextManager(knowledge_context, sector)
+    running_context = context_manager.initialize_context()
+
+    FOR each_section IN educational_outline:
+        section_context = context_manager.get_contextual_info(each_section, running_context)
+        section_content = generate_with_educational_awareness(each_section, section_context)
+        running_context = context_manager.evolve_context(running_context, section_content)
+
+    RETURN validate_educational_coherence(generated_sections)
