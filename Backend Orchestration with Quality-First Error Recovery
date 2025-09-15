@@ -1,0 +1,17 @@
+ASYNC FUNCTION orchestrate_video_generation(concept_request):
+    session_id = generate_session()
+    progress_tracker = ProgressTracker(session_id)
+
+    TRY:
+        knowledge_data = AWAIT extract_knowledge_with_caching(concept_request)
+        ai_content = AWAIT generate_content_with_quality_validation(concept_request, knowledge_data)
+        formatted_slides = AWAIT format_with_sector_adaptation(ai_content)
+        animations = AWAIT create_animations_with_fallback(formatted_slides)
+        final_video = AWAIT render_with_quality_assurance(animations)
+
+        RETURN successful_response(final_video, session_id)
+
+    CATCH quality_error:
+        RETURN attempt_quality_recovery(quality_error)
+    CATCH timeout_error:
+        RETURN attempt_simplified_generation(timeout_error)
