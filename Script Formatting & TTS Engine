@@ -1,0 +1,9 @@
+FUNCTION format_slides_and_generate_audio(generated_content, sector_templates):
+    formatted_slides = apply_sector_formatting(generated_content, sector_templates)
+    
+    FOR each_slide IN formatted_slides:
+        slide_text = extract_text_for_tts(each_slide)
+        audio_file = generate_audio_from_text(slide_text)
+        attach_audio_to_slide(each_slide, audio_file)
+
+    RETURN formatted_slides_with_audio
